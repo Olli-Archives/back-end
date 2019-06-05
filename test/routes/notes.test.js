@@ -1,10 +1,10 @@
-const { getAgent } = require('../data-helpers');
+const { getAgent } = require('./data-helpers');
 
 
 describe('notes routes', () => {
   it('can create a note', async() => {
     const note = await getAgent()
-      .post('./api/v1/notes')
+      .post('/api/v1/notes')
       .send({
         title: 'test title',
         body: 'test body'
@@ -14,7 +14,7 @@ describe('notes routes', () => {
       title: 'test title',
       body: 'test body',
       _id: expect.any(String),
-      __v:0
+      __v: 0
     });
 
   });
