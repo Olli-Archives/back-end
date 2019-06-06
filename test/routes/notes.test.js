@@ -31,5 +31,22 @@ describe('notes routes', () => {
     expect(notes.body).toHaveLength(1);
 
   });
+  it('can delete note by id', async() => {
+    await getAgent()
+      .post('/api/v1/notes')
+      .send({
+        title: 'test title',
+        body: 'test body'
+      });
+    const notes = await getAgent()
+      .get('/api/v1/notes');
+    const id = notes.body[0]._id;
+    const deleted = await getAgent()
+      .delete(`/api/v1/notes/${id}`);
+
+    expect(deleted.body).toEqual({
+      _id: expect.any(String)
+    });
+  });
 })
 ;
