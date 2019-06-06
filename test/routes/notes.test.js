@@ -18,5 +18,18 @@ describe('notes routes', () => {
     });
 
   });
+  it('can get all notes', async() => {
+    await getAgent()
+      .post('/api/v1/notes')
+      .send({
+        title: 'test title',
+        body: 'test body'
+      });
+    const notes = await getAgent()
+      .get('/api/v1/notes');
+
+    expect(notes.body).toHaveLength(1);
+
+  });
 })
 ;
